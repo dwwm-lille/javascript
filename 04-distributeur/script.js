@@ -1,5 +1,8 @@
+// Déclarer les variables en haut du script
+var drink;
+
 do {
-    var drink = prompt('Que voulez-vous boire ? Café (caf), thé (the) ou chocolat (cho) ?').toLowerCase();
+    drink = prompt('Que voulez-vous boire ? Café (caf), thé (the) ou chocolat (cho) ?').toLowerCase();
 } while (drink != 'caf' && drink != 'the' && drink != 'cho');
 
 var sugar = prompt('Quelle dose de sucre souhaitez-vous ? 0, 1 ou 2');
