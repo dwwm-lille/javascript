@@ -86,3 +86,21 @@ let goodBye = () => {
 // On appelle la fonction pour dire bonjour
 console.log(hello('Fiorella'));
 console.log(hello('Toto', 'en'));
+
+// La portée des variables
+var number = 10; // Variable globale
+
+function myFunction() {
+    var other = 20; // Variable locale
+    console.log(number);
+    console.log(other);
+
+    function otherFunction() {
+        console.log('Inception');
+    }
+    otherFunction();
+}
+
+console.log(number);
+myFunction();
+console.log(other);
