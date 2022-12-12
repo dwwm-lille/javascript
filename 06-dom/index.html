@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <div id="title" class="a b">Salut <span>le</span> HTML</div>
+    <div class="subtitle">Au revoir le JS</div>
+    <div class="subtitle">Au revoir le CSS</div>
+
+    <script>
+        // On peut récupèrer les éléments HTML en JS par id
+        var titleElement = document.getElementById('title');
+        // En sélectionnant par la classe, on obtient un tableau d'éléments HTML
+        var subtitleElements = document.getElementsByClassName('subtitle');
+
+        console.log(titleElement);
+        console.log(subtitleElements);
+
+        // On peut récupèrer les informations sur la div
+        console.log(titleElement.textContent); // Texte de la balise sans HTML
+        console.log(subtitleElements[0].textContent);
+        console.log(titleElement.id); // Affiche title
+        console.log(titleElement.className); // Affiche "a b"
+        console.log(titleElement.innerHTML); // Texte de la balise avec HTML
+
+        // On peut modifier une div
+        titleElement.innerHTML = 'Salut <span>le</span> JS';
+        let el = subtitleElements[0];
+        el.textContent = el.textContent.replace('JS', 'HTML');
+
+        // Pour info, window est un objet contenant des informations sur la fenêtre ou le navigateur
+        console.log(window.navigator);
+
+        // On peut parcourir un getElementsByClassName comme un tableau
+        for (let subtitleElement of subtitleElements) {
+            console.log(subtitleElement.textContent);
+        }
+
+        // Créer un élément HTML en JS
+        var p = document.createElement('p');
+        p.textContent = 'Je suis un paragraphe';
+
+        document.body.appendChild(p); // On ajoute le p dans le DOM à la fin de body
+        titleElement.after(p); // Je mets le p après la div #title
+        // titleElement.after(p.cloneNode(true)); // Le p se déplace par défaut mais on peut le copier avec un clone
+
+        // On peut aussi changer le CSS en JS...
+        p.style.backgroundColor = '#0000ff';
+        p.style.fontSize = '33px';
+
+        // NOT WORK (ça marche pas) car on écrase l'objet en mode "bourrin"
+        p.style = {
+            backgroundColor: '#0000ff',
+            fontSize: '33px',
+        };
+
+        // On peut écrire du "css" dans le js de manière propre avec le assign qui fusionne dans l'objet d'origine
+        Object.assign(p.style, {
+            backgroundColor: '#0000ff',
+            'font-size': '33px',
+        });
+
+        // Il y a des méthodes alternatives aux getElementBy...
+        titleElement = document.querySelector('#title');
+        subtitleElements = document.querySelectorAll('.subtitle');
+
+        console.log(titleElement);
+        console.log(subtitleElements);
+
+        // document.getElementById('title') === document.querySelector('#title') // true
+    </script>
+</body>
+</html>
