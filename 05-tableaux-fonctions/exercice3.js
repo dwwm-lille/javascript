@@ -30,7 +30,7 @@ console.log(numbers);
 
 // Exercice 2
 let quantity = prompt('Combien doit-on sortir de couleurs ?');
-quantity = parseInt(quantity) || 5;
+quantity = parseInt(quantity) || 5; // Le 5 est une valeur par défaut
 let references = ['rouge', 'jaune', 'bleu']; // Tableau de référence pour aller piocher une couleur aléatoire
 let colors = []; // Tableau avec les couleurs aléatoires
 let quantities = []; // Quantité de chaque couleurs
@@ -68,9 +68,10 @@ for (let index in quantities) {
         continue; // On arrête l'itération actuelle et on passe à l'itération suivante
     }
 
-    if (quantities[index] === max) { // Couleur ex aequo avec la première
-        selecteds[1] = index;
-    }
+    // Ce if ne sert pas vraiment...
+    // if (quantities[index] === max) { // Couleur ex aequo avec la première
+    //     selecteds[1] = index;
+    // }
 
     if (quantities[index] > max2) {
         selecteds[1] = index;
