@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice souris</title>
+    <style>
+        #circle {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="circle"></div>
+
+    <script>
+        var circle = document.getElementById('circle');
+        var canMove = false;
+
+        // Un événement se met forcément sur un élément HTML
+        // On peut utiliser window ou document si on veut écouter "tout" le document HTML
+        document.addEventListener('mousemove', function (event) {
+            if (canMove) { 
+                console.log(event.pageX, event.pageY);
+
+                // On change la position de la div par rapport à celle de la souris
+                // 50 c'est la largeur (pour X) ou la hauteur (pour Y) divisée par 2
+                circle.style.top = event.pageY - 50 + 'px';
+                circle.style.left = event.pageX - 50 + 'px';
+            }
+        });
+
+        circle.addEventListener('click', () => canMove = true);
+        circle.addEventListener('dblclick', () => canMove = false);
+    </script>
+</body>
+</html>
