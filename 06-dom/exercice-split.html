@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split</title>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit lorem consectetur lorem elit.</p>
+
+    <script>
+        // https://slides.com/matthieumota/javascript#/43
+        var p = document.getElementsByTagName('p')[0];
+        var words = p.textContent.split(' '); // Le chat => ['Le', 'chat'] => Splitter la phrase en plusieurs parties séparées par des espaces
+
+        // for (let i = 0; i < words.length; i++) {
+        for (let index in words) {
+            console.log(index);
+            console.log(words[index]);
+            if (words[index].toLowerCase() == 'lorem') {
+                words[index] = '<span style="color: green">'+words[index]+'</span>';
+            }
+        }
+
+        console.log(words.join(' '));
+        // p.innerHTML = words.join(' ');
+
+        // Solution n°2 avec Regex pour plus tard...
+        p.innerHTML = p.innerHTML.replace(/([Ll]orem)/g, '<span style="color: green">$1</span>');
+    </script>
+</body>
+</html>

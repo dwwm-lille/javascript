@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Exercice</title>
+</head>
+<body>
+    <p>Lorem</p>
+    <p>Lorem</p>
+    <p>Lorem</p>
+
+    <script>
+        // https://slides.com/matthieumota/javascript#/42
+        document.body.style.backgroundColor = '#d5b9b9';
+
+        // document.querySelectorAll('p');
+        let paragraphs = document.getElementsByTagName('p');
+        for (let p of paragraphs) {
+            p.style.fontSize = '21px';
+        }
+
+        let link = document.createElement('a');
+        link.href = 'https://developer.mozilla.org';
+        link.textContent = 'Cliquer ici';
+        link.target = '_blank';
+
+        document.body.appendChild(link);
+
+        link.style.color = '#fff';
+        link.style.textDecoration = 'none';
+
+        // Fonction pour générer une couleur aléatoire
+        function randomColor() {
+            let letters = '0123456789abcdef';
+            let color = '#';
+
+            for (let i = 0; i < 6; i++) {
+                let randomIndex = Math.floor(Math.random() * letters.length); // Nombre aléatoire entre 0 et 15
+                color += letters[randomIndex];
+            }
+
+            return color; // #a3fe62
+        }
+
+        link.style.backgroundColor = randomColor();
+    </script>
+</body>
+</html>
