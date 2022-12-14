@@ -17,6 +17,7 @@
     <button data-class="color">Ajouter couleur</button>
     <button data-class="bg">Ajouter fond</button>
     <button data-class="border">Ajouter bordure</button>
+    <button id="invert">Inverser</button>
 
     <script>
         // Fonction valable uniquement en JS pour nous simplifier la vie
@@ -34,8 +35,43 @@
             title.innerHTML = input.value;
         }
 
+        function changeTextButton(button) {
+            if (title.classList.contains(button.dataset.class)) {
+                button.innerHTML = button.innerHTML.replace('Ajouter', 'Retirer');
+            } else {
+                button.innerHTML = button.innerHTML.replace('Retirer', 'Ajouter');
+            }
+        }
+
         function handleClasses() {
-            console.log(this.dataset.class); // la valeur de data-class
+            // Gérer le cas du bouton d'inversion
+            if (this.dataset.class == 'invert') {
+                // Checker les classes du titre
+                title.classList.toggle('color');
+                title.classList.toggle('bg');
+                title.classList.toggle('border');
+
+                // Changer le texte des boutons
+                for (let button of buttons) {
+                    // title.classList.toggle(button.dataset.class);
+                    if (title.classList.contains(button.dataset.class)) {
+                        button.innerHTML = button.innerHTML.replace('Ajouter', 'Retirer');
+                    } else {
+                        button.innerHTML = button.innerHTML.replace('Retirer', 'Ajouter');
+                    }
+                    // Solution plus smart
+                    if (button.dataset.class != 'invert') {
+                        // button.click();
+                    }
+                    // Solution encore plus smart (on range le code dans une fonction)
+                    changeTextButton(button);
+                }
+
+                // J'arrête le code avec le return pour éviter de faire le code d'avant
+                return;
+            }
+
+            console.log(this.dataset.class); // la valeur de data-class="border"
             title.classList.toggle(this.dataset.class); // on ajoute la classe au h1
 
             if (title.classList.contains(this.dataset.class)) {
@@ -44,11 +80,15 @@
             } else {
                 this.innerHTML = this.innerHTML.replace('Retirer', 'Ajouter');
             }
+            // Solution smart (on range le code dans une fonction)
+            // changeTextButton(this);
         }
 
         for (let button of buttons) {
             button.addEventListener('click', handleClasses);
         }
+
+        // $('#invert').addEventListener('click', handleInvert);
 
         /*
             Ajouter un 4ème bouton qui permet d'inverser le sens des classes.
