@@ -12,6 +12,25 @@
             border-radius: 50%;
             position: absolute;
         }
+
+        .enemy {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid yellow;
+        }
+
+        .enemy:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
@@ -36,6 +55,19 @@
 
         circle.addEventListener('click', () => canMove = true);
         circle.addEventListener('dblclick', () => canMove = false);
+
+        // Gestion des ennemies
+        for (let i = 0; i < 10; i++) {
+            let div = document.createElement('div');
+            div.className = 'enemy';
+            div.style.top = Math.floor(Math.random() * 97) + 'vh';
+            div.style.left = Math.floor(Math.random() * 100) + 'vw';
+            div.addEventListener('mouseenter', function () {
+                console.log(i);
+                div.remove(); // Supprime la div si on clique / survole dessus...
+            });
+            document.body.appendChild(div);
+        }
     </script>
 </body>
 </html>
