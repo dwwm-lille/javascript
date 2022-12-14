@@ -18,8 +18,8 @@
         let title = document.querySelector('#formation');
         let button = document.querySelector('#finish');
         let slogan = document.querySelector('.slogan');
-        let counter = document.querySelector('counter');
-        let increment = document.querySelector('increment');
+        let counter = document.querySelector('#counter');
+        let increment = document.querySelector('#increment');
 
         // Avant les 2 secondes, on veut ajouter ...
         let duration = 500;
@@ -60,6 +60,26 @@
                 slogan.textContent = word.substr(0, word.length - (index + 1));
             }, totalDuration + duration * (index + 1));
         }
+
+        increment.addEventListener('click', function () {
+            let counting = 3;
+            this.style.display = 'none'; // Cacher le bouton
+
+            let interval = setInterval(() => {
+                if (counting == 0) {
+                    // Arrête le setInterval
+                    clearInterval(interval);
+                    counter.innerHTML = 'Bonne année !';
+                    // On peut faire this car on est
+                    // dans une arrow function sinon
+                    // on mets increment
+                    this.style.display = 'block';
+                } else {
+                    console.log(counting);
+                    counter.innerHTML = counting--;
+                }
+            }, 1000);
+        });
     </script>
 </body>
 </html>
