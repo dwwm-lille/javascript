@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This</title>
+</head>
+<body>
+    <h1 id="title" onmouseenter="console.log(this); window.handleTitle(this);">Un titre</h1>
+
+    <script>
+        // this est un mot clé qui est différent selon le contexte
+        console.log(this); // this est window
+
+        function handleTitle(element) {
+            console.log(this); // this est window (ou l'objet appellant)
+            console.log(element); // element est le h1
+        }
+
+        let title = document.getElementById('title');
+        title.addEventListener('click', function (event) {
+            console.log(this); // this est title (ou l'objet appellant)
+            console.log(event);
+            this.textContent = 'Le titre cliqué';
+        });
+
+        // this avec les objets
+        var frigo = {
+            tomates: 10,
+            brand: 'Samsung',
+            cheeses: ['Camembert', 'Roquefort'],
+            display: function () {
+                console.log(this.brand);
+            },
+            serve() {
+                let cheese = this.cheeses.pop(); // On prend et supprime le dernier fromage
+                console.log(cheese);
+            },
+        };
+
+        frigo.display();
+        frigo.serve();
+
+        // Je peux créer une fonction qui me sert à créer des objets JS
+        function Car(brand) {
+            return {
+                brand: brand,
+                display() {
+                    return this.brand;
+                }
+            };
+        }
+
+        let car1 = Car('Renault');
+        console.log(car1.display());
+        let car2 = Car('Porsche');
+        console.log(car2.display());
+    </script>
+</body>
+</html>

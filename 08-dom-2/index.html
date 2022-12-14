@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+
+    <style>
+        .color { color: blue }
+        .bg { background-color: lightblue; }
+        .border { border: 1px dashed #000; }
+    </style>
+</head>
+<body>
+    <h1 id="title"></h1>
+    <input type="text" onkeyup="handleChange(this)">
+    <button data-class="color">Ajouter couleur</button>
+    <button data-class="bg">Ajouter fond</button>
+    <button data-class="border">Ajouter bordure</button>
+
+    <script>
+        // Fonction valable uniquement en JS pour nous simplifier la vie
+        // Aucun intérêt si on utilise jQuery...
+        function $(element) {
+            return document.querySelector(element);
+        }
+
+        let $$ = (element) => document.querySelectorAll(element);
+
+        let title = $('#title');
+        let buttons = $$('button');
+
+        function handleChange(input) {
+            title.innerHTML = input.value;
+        }
+
+        function handleClasses() {
+            console.log(this.dataset.class); // la valeur de data-class
+            title.classList.toggle(this.dataset.class); // on ajoute la classe au h1
+
+            if (title.classList.contains(this.dataset.class)) {
+                // this est bien le bouton ici...
+                this.innerHTML = this.innerHTML.replace('Ajouter', 'Retirer');
+            } else {
+                this.innerHTML = this.innerHTML.replace('Retirer', 'Ajouter');
+            }
+        }
+
+        for (let button of buttons) {
+            button.addEventListener('click', handleClasses);
+        }
+    </script>
+</body>
+</html>
