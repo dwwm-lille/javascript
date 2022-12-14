@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+</head>
+<body>
+    <h1 id="formation">Je ne suis pas encore développeur</h1>
+    <button id="finish">Finir formation</button>
+
+    <h2 class="slogan">Développeur web</h2>
+
+    <span id="counter"></span>
+    <button id="increment">Lancer un décompte</button>
+
+    <script>
+        let title = document.querySelector('#formation');
+        let button = document.querySelector('#finish');
+        let slogan = document.querySelector('.slogan');
+        let counter = document.querySelector('counter');
+        let increment = document.querySelector('increment');
+
+        // Avant les 2 secondes, on veut ajouter ...
+        let duration = 500;
+        for (let i = 1; i <= 3; i++) {
+            setTimeout(function () {
+                title.textContent += '.';
+            }, duration * i);
+        }
+
+        // Change le titre au bout de 2 seconds
+        let waiting = setTimeout(function () {
+            title.textContent = 'Je suis en train de devenir développeur';
+        }, 2000);
+
+        button.addEventListener('click', function () {
+            clearTimeout(waiting); // Je peux arrêter le setTimeout en cliquant sur le button
+
+            setTimeout(function () {
+                title.textContent = 'Je suis développeur';
+            }, 500);
+        });
+
+        // Afficher le slogan en mode machine à écrire
+        let word = slogan.textContent; // On stocke la phrase à écrire
+        slogan.textContent = ''; // On "cache" la phrase de départ
+
+        let totalDuration = 40 * word.length + 500;
+        for (let index in word) {
+            index = parseInt(index); // ! index est une chaine donc index + 1 == 11
+            let duration = 40;
+
+            setTimeout(function () {
+                slogan.textContent += word[index];
+            }, duration * (index + 1));
+
+            // On va effacer le mot...
+            setTimeout(function () {
+                slogan.textContent = word.substr(0, word.length - (index + 1));
+            }, totalDuration + duration * (index + 1));
+        }
+    </script>
+</body>
+</html>
