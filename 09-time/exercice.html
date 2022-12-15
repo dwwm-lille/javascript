@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice Time</title>
+</head>
+<body>
+    <h1 id="job">Intégrateur</h1>
+
+    <script>
+        // https://slides.com/matthieumota/javascript#/53
+        // Exo 1
+        let job = document.querySelector('#job');
+        let jobs = ['Intégrateur', 'Développeur web', 'Administrateur système'];
+        let i = 1; // On commence à 1 pour "passer" Intégrateur
+
+        setInterval(function () {
+            if (i >= jobs.length) {
+                i = 0;
+            }
+
+            job.textContent = jobs[i++]; // 0 % 3 = 0, 1 % 3 = 1, 2 % 3 = 2, 3 % 3 = 0, 4 % 3 = 1
+        }, 5000);
+
+        // Exo 2
+        setTimeout(function () {
+            document.body.style.transition = '0.5s';
+            document.body.style.backgroundColor = 'lightblue';
+        }, 5000);
+    </script>
+</body>
+</html>
