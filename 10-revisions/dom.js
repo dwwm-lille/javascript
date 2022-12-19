@@ -74,7 +74,7 @@ const colorButton = document.querySelector('#toggle-colors');
 const roundButton = document.querySelector('#toggle-roundedges');
 const addButton = document.querySelector('#add-box');
 const removeButton = document.querySelector('#remove-box');
-const boxes = document.querySelectorAll('.box');
+let boxes = document.querySelectorAll('.box');
 
 colorButton.addEventListener('click', () => {
     boxes.forEach(box => box.classList.toggle('box-bg'));
@@ -94,4 +94,37 @@ roundButton.addEventListener('click', () => {
     countBorder++;
 });
 
+// Ajout boîte
+addButton.addEventListener('click', () => {
+    // Créer une div
+    let div = document.createElement('div');
 
+    // Ajoute l'id sur la div
+    div.id = 'box' + (document.querySelectorAll('.box').length + 1);
+
+    // Ajoute la classe sur la div
+    div.classList.add('box');
+    // div.className = 'box other'; // Autre solution
+
+    // Si la div précédente a la classe box-bg, on l'ajoute (BONUS)
+    if (boxes[0].classList.contains('box-bg')) {
+        div.classList.add('box-bg');
+    }
+
+    // Si le countBorder est pair, ça veut dire que la bordure est désactivée
+    div.style.borderRadius = (countBorder % 2 == 0) ? '0px' : '10px';
+
+    // Ajoute la div dans la div #boxes
+    document.querySelector('#boxes').appendChild(div);
+
+    // On mets à jour la variable boxes
+    boxes = document.querySelectorAll('.box');
+});
+
+// Retirer boîte
+removeButton.addEventListener('click', () => {
+    // On récupère le nombre de boxes actuelles
+    let count = document.querySelectorAll('.box').length;
+    // On supprime la dernière boîte
+    document.querySelector('#box'+count).remove();
+});
