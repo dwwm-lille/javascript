@@ -52,3 +52,19 @@ let interval = setInterval(function () {
         clearInterval(interval);
     }
 }, 3000);
+
+// Exo vache
+let button = document.querySelector('#button-change');
+let cowName = document.querySelector('#input-name');
+let cowColor = document.querySelector('#input-color');
+let spans = document.querySelectorAll('.cow-color');
+
+// Au clic sur le bouton
+button.addEventListener('click', function () {
+    // On modifie le HTML de chaque span
+    spans.forEach(function (span) {
+        // La value permet de récupèrer la valeur saisie dans le input
+        span.innerHTML = cowName.value;
+        span.style.color = cowColor.value;
+    });
+});
