@@ -68,3 +68,30 @@ button.addEventListener('click', function () {
         span.style.color = cowColor.value;
     });
 });
+
+// Exo boxes
+const colorButton = document.querySelector('#toggle-colors');
+const roundButton = document.querySelector('#toggle-roundedges');
+const addButton = document.querySelector('#add-box');
+const removeButton = document.querySelector('#remove-box');
+const boxes = document.querySelectorAll('.box');
+
+colorButton.addEventListener('click', () => {
+    boxes.forEach(box => box.classList.toggle('box-bg'));
+});
+
+let countBorder = 0;
+roundButton.addEventListener('click', () => {
+    for (let box of boxes) {
+        // Une fois sur 2, on mets le border-radius
+        if (countBorder % 2 == 0) {
+            box.style.borderRadius = '10px';
+        } else {
+            box.style.borderRadius = '0px';
+        }
+    }
+
+    countBorder++;
+});
+
+
