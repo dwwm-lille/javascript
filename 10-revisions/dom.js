@@ -128,3 +128,46 @@ removeButton.addEventListener('click', () => {
     // On supprime la dernière boîte
     document.querySelector('#box'+count).remove();
 });
+
+// Fonction pour savoir si un nombre est premier
+function isFirst(number) {
+    if (number <= 1) {
+        return false;
+    }
+
+    for (let i = 2; i < number; i++) {
+        if (number % i == 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// Génération des 100 divs. J'ai utilisé des constantes pour changer.
+// Une const, c'est comme un let mais on ne peut pas changer sa valeur
+const d = document; // Parce que j'en ai marre d'écrire document
+// On va d'abord créer la div principale
+const root = d.createElement('div');
+
+// On ajoute la div principale 
+d.body.appendChild(root);
+
+// On va maintenant ajouter 100 div à root
+for (let i = 1; i <= 100; i++) {
+    const div = d.createElement('div');
+    root.appendChild(div);
+    div.innerHTML = i;
+
+    // Nombre pair ou impair
+    if (i % 2 == 0) {
+        div.style.backgroundColor = 'lightgreen';
+    } else if (i % 2 != 0) {
+        div.style.backgroundColor = 'lightyellow';
+    }
+
+    // Nombre premier
+    if (isFirst(i)) {
+        div.style.backgroundColor = 'lightcoral';
+    }
+}
