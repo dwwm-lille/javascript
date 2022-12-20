@@ -43,12 +43,37 @@ document.querySelector('.keyboard').addEventListener('keyup', (event) => {
     console.log(event);
 });
 
-let countries = [];
-countries.push('Pays');
+// Exercice pays
+let countries = [
+	'france', 'italie', 'angleterre', 'espagne', 'portugal', 'belgique'
+];
+const ul = document.querySelector('#countries');
 
+// On peut mettre la majuscule avec un .map
+countries = countries.map(function (country) {
+    return country.charAt(0).toUpperCase() + country.slice(1);
+});
 
-let letters = ['C', 'B', 'A'];
+// Trier les pays
+countries.sort();
 
-for (let i = 0; i < letters.length; i++) {
-    letters = letters.sort()[i];
+// Afficher les pays avec images
+for (let country of countries) {
+    const li = document.createElement('li');
+    li.innerHTML = country.charAt(0).toUpperCase() + country.slice(1);
+    ul.appendChild(li);
+
+    // Création de l'image
+    const img = document.createElement('img');
+    let iso = country.slice(0, 2).toLowerCase(); // On s'assure de toujours utiliser le nom du pays en minuscule
+
+    // Gérer les exceptions
+    if (country.toLowerCase() == 'angleterre') {
+        iso = 'england';
+    } else if (country.toLowerCase() == 'portugal') {
+        iso = 'pt';
+    }
+
+    img.src = 'https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/75/country-4x3/'+iso+'.png';
+    li.appendChild(img);
 }
