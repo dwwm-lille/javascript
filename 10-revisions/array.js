@@ -32,4 +32,23 @@ console.log(contacts.sort(function (contactB, contactA) {
     return 1; // Garde le sens normal
 }));
 
-// Event...
+// Event... En fonction des events, on a pas le même objet event
+document.querySelector('.keyboard').addEventListener('input', (event) => {
+    console.log(event.data);
+    console.log(event.target.value); // target est l'élément qui a "subit" l'événement
+});
+
+document.querySelector('.keyboard').addEventListener('keyup', (event) => {
+    console.log(event.key);
+    console.log(event);
+});
+
+let countries = [];
+countries.push('Pays');
+
+
+let letters = ['C', 'B', 'A'];
+
+for (let i = 0; i < letters.length; i++) {
+    letters = letters.sort()[i];
+}
