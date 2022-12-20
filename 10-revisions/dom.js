@@ -171,3 +171,21 @@ for (let i = 1; i <= 100; i++) {
         div.style.backgroundColor = 'lightcoral';
     }
 }
+
+// Exo prix
+let priceInput = document.querySelector('.priceWithoutTaxes');
+let rateInput = document.querySelector('#rate');
+let span = document.querySelector('#result');
+
+// Fonction à attacher aux 2 inputs
+function handleInput() {
+    // On va récupèrer la valeur actuelle du input
+    let price = priceInput.value;
+    let priceWithTaxes = price * (1 + rateInput.value / 100);
+
+    span.innerHTML = priceWithTaxes.toFixed(2);
+}
+
+// L'événement input est un keyup sans les flèches
+priceInput.addEventListener('input', handleInput);
+rateInput.addEventListener('input', handleInput);
