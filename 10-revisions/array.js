@@ -139,3 +139,88 @@ for (let car of garage2) {
         console.log(item);
     }
 }
+
+// Quelques helpers de folie
+let $ = (el) => document.querySelector(el);
+
+/**
+ * Permet de créer un élément dans le DOM
+ */
+let create = (el) => document.createElement(el);
+
+// function $(element) {
+//     return document.querySelector(element);
+// }
+
+// Fonction pour la moyenne
+const average = (numbers) => {
+    let sum = 0;
+
+    for (let number of numbers) {
+        sum += number;
+    }
+
+    return (sum / numbers.length).toFixed(2);
+}
+
+const averageWithReduce = (numbers) => numbers.reduce((previous, current) => previous + current, 0) / numbers.length;
+
+// Exercice apprenants
+let students = [
+    ['Fiorella', [10, 12, 13]],
+    ['Marina', [15, 11, 19]],
+];
+
+// Le p avec Fiorella
+let p = create('p');
+p.innerHTML = `${students[0][0]} a eu ${students[0][1].join(' / ')}`;
+$('#students').after(p); // J'ajoute le p après le ul
+
+// Liste des apprenants
+let ulStudents = $('#students');
+
+// Boucle normale pour afficher les apprenants
+students.forEach((student) => {
+    let li = create('li');
+    li.innerHTML = `${student[0]} a eu ${student[1].join(', ')}`;
+    ulStudents.appendChild(li);
+
+    // Le bouton moyenne pour chaque apprenant
+    let button = document.createElement('button');
+    let span = document.createElement('span');
+    button.addEventListener('click', function () {
+        let avg = average(student[1]);
+        console.log(avg);
+        span.innerHTML = avg;
+        button.after(span);
+    });
+    button.innerHTML = 'Moyenne';
+    li.appendChild(button);
+});
+
+// Boucle en mode super sayan (Méthode avancée...)
+// ulStudents.innerHTML = students.map(function (student) {
+//     return `<li>${student[0]} a eu ${student[1].join(', ')}</li>`;
+// }).join('');
+
+// Le bouton moyenne
+let h1 = create('h1'); // On crée le h1
+$('.average').addEventListener('click', (event) => {
+    // Calcule la moyenne
+    // let sum = 0;
+    // let notes = students[0][1];
+
+    // for (let note of notes) {
+    //     sum += note;
+    // }
+
+    // Méthode avancée (Reduce)
+    // notes.reduce(function (previous, current) {
+    //     return previous + current;
+    // }, 0) / notes.length;
+
+    // Ajoute le h1 avant le bouton (event.target est la même chose que $('.average'))
+    // h1.innerHTML = (sum / notes.length).toFixed(2);
+    h1.innerHTML = average(students[0][1]);
+    event.target.before(h1);
+});
